@@ -2,14 +2,14 @@
 
 _An extension for [Nova](https://nova.app)._
 
-Adds hotkeys to insert a new line before or after the current line.
+Adds hotkeys to insert a newline before or after the current line.
 
 + **⌘↩︎**: Insert newline after current line.
 + **⇧⌘↩︎**: Insert newline before current line.
 
+Supports multiple cursors
 
 ## To-do
 
-+ Support multiple cursors
 + Automatic indentation
 + Make cursor movement optional

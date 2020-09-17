@@ -2,9 +2,13 @@
     "identifier": "org.jbree.InsertLine",
     "name": "Insert Line",
     "organization": "Joshua Breeden",
-    "description": "Adds hotkeys to insert a new line before or after the current line.",
-    "version": "1.0",
+    "description": "Adds hotkeys to insert a newline before or after the current line.",
+    "version": "1.1",
     "categories": ["commands"],
+    
+    "repository": "https://github.com/jbree/InsertLine.novaextension",
+    "bugs": "https://github.com/jbree/InsertLine.novaextension/issues",
+    "license": "MIT",
     
     "main": "main.js",
     
@@ -18,13 +22,13 @@
                 "title": "Insert Line Before",
                 "command": "insert-line.before",
                 "shortcut": "cmd-shift-return",
-                "when": "editorHasFocus && !editorHasMultipleSelections"
+                "when": "editorHasFocus"
             },
             {
                 "title": "Insert Line After",
                 "command": "insert-line.after",
                 "shortcut": "cmd-return",
-                "when": "editorHasFocus && !editorHasMultipleSelections"
+                "when": "editorHasFocus"
             }
         ]
     }
