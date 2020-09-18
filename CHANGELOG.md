@@ -1,3 +1,7 @@
+## Version 1.1.1
+
++ Update icon
+
 ## Version 1.1
 
 + Add support for multiple cursors
