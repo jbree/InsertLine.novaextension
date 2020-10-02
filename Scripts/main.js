@@ -1,8 +1,17 @@
+function getSelectedLineRanges (editor) {
+    return editor.selectedRanges
+        // convert selection ranges to line ranges
+        .map((range) => editor.getLineRangeForRange(range))
+        // filter out multiple selections on a single line
+        .filter((range, index, ranges) => {
+            return index === 0 || !range.isEqual(ranges[index - 1])
+        })
+}
+
 nova.commands.register("insert-line.before", (editor) => {
     let ranges
     editor.edit((edit) => {
-        let offset = editor.selectedRanges.length - 1
-        ranges = editor.selectedRanges
+        ranges = getSelectedLineRanges(editor)
             // work from the end of the file
             .reverse()
             // add a line break to the beginning of selected line
@@ -13,9 +22,9 @@ nova.commands.register("insert-line.before", (editor) => {
                 return range
             })
             // update ranges to account for newly added line breaks
-            .map((range) => {
+            .map((range, index, ranges) => {
+                const offset = ranges.length - 1 - index
                 range = new Range (range.start + offset, range.start + offset)
-                offset--
                 return range;
             })
             // put cursor ranges back in ascending order
@@ -46,13 +55,13 @@ nova.commands.register("insert-line.after", (editor) => {
 
     let ranges
     editor.edit((edit) => {
-        let offset = editor.selectedRanges.length - 1
-        ranges = editor.selectedRanges
+        ranges = getSelectedLineRanges(editor)
             // work from the end of the file
             .reverse()
-            .map((range) => {
-                const lineRange = editor.getLineRangeForRange(range)
-                range = new Range(lineRange.end, lineRange.end)
+            // add a newline at the end of each line with a cursor
+            .map((lineRange) => {
+                // const lineRange = editor.getLineRangeForRange(range)
+                const range = new Range(lineRange.end, lineRange.end)
                 edit.replace(range, "\n")
                 // special case: cursor on last line
                 if (isLastLine(lineRange)) {
@@ -61,9 +70,9 @@ nova.commands.register("insert-line.after", (editor) => {
                 return range
             })
             // update ranges to account for newly added line breaks
-            .map((range) => {
+            .map((range, index, ranges) => {
+                const offset = ranges.length - 1 - index
                 range = new Range (range.end + offset, range.end + offset)
-                offset--
                 return range;
             })
             // put cursor ranges back in ascending order
