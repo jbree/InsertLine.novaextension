@@ -1,3 +1,8 @@
+## Version 1.2
+
++ Fix _Insert Line After_ with cursor on last line of file
++ Multiple cursors/selections on one line now result in a single inserted line
+
 ## Version 1.1.1
 
 + Update icon

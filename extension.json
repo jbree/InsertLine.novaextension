@@ -3,7 +3,7 @@
     "name": "Insert Line",
     "organization": "Joshua Breeden",
     "description": "Adds hotkeys to insert a newline before or after the current line.",
-    "version": "1.1.1",
+    "version": "1.2",
     "categories": ["commands"],
 
     "repository": "https://github.com/jbree/InsertLine.novaextension",
